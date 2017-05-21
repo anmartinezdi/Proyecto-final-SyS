@@ -1,3 +1,6 @@
+
+
+////////////////////////PRIMER PUNTO//////////////////////////////////////////////////////////////////////////////
 [x1,Fs]=loadwave("C:\Users\edgar\Documents\recording2017_05_07_13_55_14.wav")
 [h1,Fs,bits]=wavread("C:\Users\edgar\Desktop\señales\York_catedral.wav")
 [h2,Fs1,bits]=wavread("C:\Users\edgar\Desktop\señales\estudio_grabacion.wav")
