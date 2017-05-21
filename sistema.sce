@@ -1,3 +1,5 @@
+
+/////////////////////////////////////////1ERPUNTO//////////////////////////////////
 [x1,Fs]=loadwave("C:\Users\edgar\Documents\recording2017_05_07_13_55_14.wav")
 [h1,Fs,bits]=wavread("C:\Users\edgar\Desktop\señales\York_catedral.wav")
 [h2,Fs1,bits]=wavread("C:\Users\edgar\Desktop\señales\estudio_grabacion.wav")
@@ -43,7 +45,7 @@ h3=alargar(h3,length(x))
 
 
 C1=convolucion(x,h1)
-C2=convolucion(x,h2)
+C2=convolucion(x,h2)  
 C3=convolucion(x,h3)
 CREAL1=real(C1)
 CREAL2=real(C2)
@@ -169,7 +171,7 @@ endfunction
 
 //B=cortar(C1)
 
-A=RespImpulso(x,C1) //toma entrada y salida del sistema y encuentra su respuesta al impulso respectiva
+A=RespImpulso(x,C1) //toma entrada y salida del sistema y encuentra su respuesta al impulso respectiva: varian entre C1,C2,C3
 
 if A==h1 then
     subplot(4,1,1)
