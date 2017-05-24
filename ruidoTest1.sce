@@ -3,6 +3,7 @@ close();
 clear;
 [y,Fs]=wavread('Hello.wav');
 y=y(1,:)
+//sound(y,Fs);
 noisegen(1,length(y)-1,0.1); //Señal de ruido, se guarda como dua_g
 
 s=y+dua_g;                  //Suma de la original mas el ruido
@@ -37,13 +38,14 @@ title("Ruido");
 subplot(4,1,3)
 plot2d(F,st);
 title("Original+Ruido");
-
-[F,sft]=dibujo(sf);
+g=sf*1.5;
+[F,sft]=dibujo(g);
 subplot(4,1,4)
 plot2d(F,sft);
 title("Filtrado");
 
 sound(sf,Fs);               //Reproduce señal filtrada
+
 
 
 //Señal filtrada es similar a la original pero la magnitud 

@@ -1,17 +1,18 @@
 
 /////////////////////////////////////////1ERPUNTO//////////////////////////////////
-[x1,Fs]=loadwave("C:\Users\edgar\Documents\recording2017_05_07_13_55_14.wav")
-[h1,Fs,bits]=wavread("C:\Users\edgar\Desktop\señales\York_catedral.wav")
-[h2,Fs1,bits]=wavread("C:\Users\edgar\Desktop\señales\estudio_grabacion.wav")
-[h3,Fs2,bits]=wavread("C:\Users\edgar\Desktop\señales\UN_Plaza_che.wav")
+[x1,Fs]=loadwave("recording2017_05_07_13_55_14.wav")
+[h1,Fs,bits]=wavread("York_catedral.wav")
+[h2,Fs1,bits]=wavread("estudio_grabacion.wav")
+[h3,Fs2,bits]=wavread("UN_Plaza_che.wav")
 
 function A=convolucion(a,b)
     c=fft(a)
     d=fft(b)
-    for i=(1:length(c))
-        B(1,i)=c(1,i)*d(1,i)
-    end
+//    for i=(1:length(c))
+//        B(1,i)=c(1,i)*d(1,i)
+//    end
 
+B=c.*d;
     A=fft(B,1)
     
 endfunction
@@ -162,18 +163,30 @@ close();
 function A=RespImpulso(a,b)
     c=fft(a)
     d=fft(b)
-    for i=(1:length(c))
-        B(1,i)=d(1,i)/c(1,i)
-    end
-
+//    for i=(1:length(c))
+//        B(1,i)=d(1,i)/c(1,i)
+//    end
+B=d./c;
     A=fft(B,1)
 endfunction
 
 //B=cortar(C1)
 
-A=RespImpulso(x,C1) //toma entrada y salida del sistema y encuentra su respuesta al impulso respectiva: varian entre C1,C2,C3
+A=RespImpulso(x,C3) //toma entrada y salida del sistema y encuentra su respuesta al impulso respectiva: varian entre C1,C2,C3
 
-if A==h1 then
+//Se hace promedio entre la respuesta al impulso obtenida y las originales y 
+//Se toma el valor absoluto de la diferencia entre el promedio y la respuesta al impulso obtenida. Si este es menor a 0.1 las señales son estadisticamente iguales
+
+
+r=(A+h1)/2;
+r1=abs(A-r);
+l=(A+h2)/2;
+l1=abs(A-l);
+p=(A+h3)/2;
+p1=abs(A-p);
+
+
+if r1<0.1 then
     subplot(4,1,1)
      plot2d(y);
      xtitle ("York_catedral") 
@@ -185,7 +198,7 @@ if A==h1 then
      plot2d(A);
      sound(h1);
      sound(A);
- elseif A==h2 then 
+ elseif l1<0.1 then 
      subplot(4,1,1)
      plot2d(y);
      subplot(4,1,2)
@@ -197,7 +210,7 @@ if A==h1 then
      plot2d(A);
      sound(h3);
      sound(A);
- elseif A==h3 then 
+ elseif p1<0.1 then 
      subplot(4,1,1)
      plot2d(y);
      subplot(4,1,2)
@@ -220,7 +233,4 @@ if A==h1 then
      plot2d(h2)
      subplot(4,1,4)
      plot2d(h3)
-     
-     
-    
 end
